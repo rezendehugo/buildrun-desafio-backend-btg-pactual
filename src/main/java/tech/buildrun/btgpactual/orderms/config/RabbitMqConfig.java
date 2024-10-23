@@ -8,16 +8,24 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class RabbitMqConfig {
+    
+    public static final String ORDER_CREATED_QUEUE = "btg-pactual-order-created"; 
 
-    public static final String ORDER_CREATED_QUEUE = "btg-pactual-order-created";
-
-    @Bean
-    public Jackson2JsonMessageConverter jackson2JsonMessageConverter() {
-        return new Jackson2JsonMessageConverter();
-    }
+    public static final String CREATE_ORDER_QUEUE = "btg-pactual-create-order";
 
     @Bean
-    public Declarable orderCreatedQueue() {
+    public Declarable orderCreatedQueue(){
         return new Queue(ORDER_CREATED_QUEUE);
     }
+
+    @Bean
+    public Declarable createOrderQueue(){
+        return new Queue(CREATE_ORDER_QUEUE);
+    }
+
+    @Bean
+    public Jackson2JsonMessageConverter jackson2JsonMessageConverter(){
+        return new Jackson2JsonMessageConverter();
+    } 
+
 }
